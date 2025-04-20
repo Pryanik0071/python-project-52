@@ -2,3 +2,5 @@
 /venv
 .env
 TODO
+db.sqlite3
+.python-version
