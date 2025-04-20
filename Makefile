@@ -1,5 +1,8 @@
+app-run:
+	uv run manage.py runserver
+
 locales-add:
-	django-admin makemessages -a
+	uv run manage.py makemessages -a
 
 locales-compile:
-    django-admin compilemessages
+	uv run manage.py compilemessages
