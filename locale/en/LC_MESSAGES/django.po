@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-20 13:44+0000\n"
+"POT-Creation-Date: 2025-04-21 10:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,10 +19,53 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: task_manager/statuses/models.py:6
+#: task_manager/templates/statuses/index.html:21
 msgid "Name"
 msgstr ""
 
-#: task_manager/templates/base.html:30
+#: task_manager/templates/base.html:31
 #: task_manager/templates/statuses/index.html:14
+#: task_manager/templates/users/login.html:31
 msgid "Statuses"
+msgstr ""
+
+#: task_manager/templates/statuses/create.html:6
+#: task_manager/templates/statuses/index.html:15
+msgid "Create status"
+msgstr ""
+
+#: task_manager/templates/statuses/create.html:11
+msgid "Create"
+msgstr ""
+
+#: task_manager/templates/statuses/delete.html:5
+msgid "Delete status"
+msgstr ""
+
+#: task_manager/templates/statuses/delete.html:6
+msgid "Are you sure you want to delete"
+msgstr ""
+
+#: task_manager/templates/statuses/delete.html:10
+msgid "Yes, delete"
+msgstr ""
+
+#: task_manager/templates/statuses/index.html:22
+msgid "Date"
+msgstr ""
+
+#: task_manager/templates/statuses/index.html:33
+msgid "Edit"
+msgstr ""
+
+#: task_manager/templates/statuses/index.html:35
+msgid "Delete"
+msgstr ""
+
+#: task_manager/templates/statuses/update.html:6
+msgid "Update status"
+msgstr ""
+
+#: task_manager/templates/statuses/update.html:11
+msgid "Update"
 msgstr ""
