@@ -1,30 +1,20 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
-from django.views import View
 
 from .models import Status
 from .forms import StatusForm
+from task_manager.mixins import CustomLoginRequiredMixin
 
 
-class IndexView(LoginRequiredMixin, View):
-    login_url = reverse_lazy('login')  # URL перенаправления когда нет auth
-    redirect_field_name = ''  # Имя параметра для перенаправления обратно
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            messages.warning(request, 'Вы должны быть авторизованы для просмотра этой страницы.')
-            return self.handle_no_permission()  # метод LoginRequiredMixin
-        return super().dispatch(request, *args, **kwargs)
+class IndexView(CustomLoginRequiredMixin):
 
     def get(self, request, *args, **kwargs):
         statuses = Status.objects.all()
         return render(request, 'statuses/index.html', {'statuses': statuses})
 
 
-class CreateView(View):
+class CreateView(CustomLoginRequiredMixin):
 
     def get(self, request, *args, **kwargs):
         form = StatusForm()
@@ -39,7 +29,7 @@ class CreateView(View):
         return render(request, 'statuses/create.html', {'form': form})
 
 
-class UpdateView(View):
+class UpdateView(CustomLoginRequiredMixin):
 
     def get(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
@@ -58,7 +48,7 @@ class UpdateView(View):
         return render(request, 'statuses/update.html', {'form': form, 'pk': pk})
 
 
-class DeleteView(View):
+class DeleteView(CustomLoginRequiredMixin):
 
     def get(self, request, *args, **kwargs):
         pk = kwargs.get('pk')
