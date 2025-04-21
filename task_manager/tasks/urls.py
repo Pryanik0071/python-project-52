@@ -14,20 +14,14 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
-from django.urls import path, include
+from django.urls import path
 
-from task_manager.views import IndexView
-from task_manager.users.views import LoginView
-from task_manager.users.views import logout_view
+from task_manager.tasks import views
 
 
 urlpatterns = [
-    path('', IndexView.as_view(), name='index'),
-    path('admin/', admin.site.urls),
-    path('users/', include('task_manager.users.urls')),
-    path('statuses/', include('task_manager.statuses.urls')),
-    path('tasks/', include('task_manager.tasks.urls')),
-    path('login/', LoginView.as_view(), name='login'),
-    path('logout/', logout_view, name='logout'),
+    path('', views.IndexView.as_view(), name='tasks'),
+    path('create/', views.CreateView.as_view(), name='tasks_create'),
+    # path('<int:pk>/update/', views.UpdateView.as_view(), name='tasks_update'),
+    # path('<int:pk>/delete/', views.DeleteView.as_view(), name='tasks_delete'),
 ]

@@ -1,8 +1,9 @@
+from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.models import User
 from django.shortcuts import render, redirect
 from django.views import View
 
-from django.contrib.auth.models import User
-from task_manager.users.forms import UserForm
+from .forms import UserForm, LoginForm
 
 
 class IndexView(View):
@@ -23,7 +24,8 @@ class UserCreateView(View):
     def post(self, request, *args, **kwargs):
         form = UserForm(request.POST)
         if form.is_valid():
-            form.save()
+            user = form.save()
+            login(request, user)
         return redirect('/')
 
 
@@ -46,3 +48,25 @@ class UserUpdateView(View):
     #     category = Category.objects.get(id=category_id)
     #     form = CategoryForm(instance=category)
     #     return render(request, 'categories/update.html', {'form': form, 'category_id': category_id})
+
+
+class LoginView(View):
+
+    def get(self, request, *args, **kwargs):
+        form = LoginForm()
+        return render(request, 'users/login.html', {'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = UserForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            password = form.cleaned_data['password']
+            user = authenticate(username=username, password=password)  # Проверяем учетные данные
+            if user is not None:
+                login(request, user)  # Выполняем вход
+                return redirect('home')  # Перенаправляем на главную страницу
+
+
+def logout_view(request):
+    logout(request)
+    # Redirect to a success page.

@@ -146,3 +146,5 @@ LOCALE_PATHS = (
     'locale',
     # os.path.join(PROJECT_DIR, 'locale'),
 )
+
+LOGIN_URL = ''

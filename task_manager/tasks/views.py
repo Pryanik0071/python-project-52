@@ -1,42 +1,36 @@
 from django.contrib import messages
-from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
 from django.views import View
 
-from .models import Status
-from .forms import StatusForm
+from .models import Task
+from .forms import TaskForm
 
 
-class IndexView(LoginRequiredMixin, View):
-    login_url = reverse_lazy('login')  # URL перенаправления когда нет auth
-    redirect_field_name = ''  # Имя параметра для перенаправления обратно
-
-    def dispatch(self, request, *args, **kwargs):
-        if not request.user.is_authenticated:
-            messages.warning(request, 'Вы должны быть авторизованы для просмотра этой страницы.')
-            return self.handle_no_permission()  # метод LoginRequiredMixin
-        return super().dispatch(request, *args, **kwargs)
+class IndexView(View):
 
     def get(self, request, *args, **kwargs):
-        statuses = Status.objects.all()
-        return render(request, 'statuses/index.html', {'statuses': statuses})
+        tasks = Task.objects.all()
+        return render(request, 'tasks/index.html', context={
+            'tasks': tasks,
+        })
 
 
 class CreateView(View):
 
     def get(self, request, *args, **kwargs):
-        form = StatusForm()
-        return render(request, 'statuses/create.html', {'form': form})
+        form = TaskForm()
+        return render(request, 'tasks/create.html', {'form': form})
 
     def post(self, request, *args, **kwargs):
-        form = StatusForm(request.POST)
+        form = TaskForm(request.POST)
         if form.is_valid():
+            new_task = form.save(commit=False)
+            new_task.author = request.user
             messages.success(request, "Статус успешно создан")
-            form.save()
-            return redirect('/statuses/')
-        return render(request, 'statuses/create.html', {'form': form})
+            new_task.save()
+            return redirect('/tasks/')
+        return render(request, 'tasks/create.html', {'form': form})
 
 
 class UpdateView(View):
