@@ -28,7 +28,7 @@
         <tr>
           <td>{{ status.id }}</td>
           <td>{{ status.name }}</td>
-          <td>{{ status.inserted_timestamp }}</td>
+          <td>{{ status.inserted_timestamp|date:"d.m.Y H:i" }}</td>
           <td>
             <a href="{% url 'status_update' pk=status.id %}">Изменить</a>
             <br />
