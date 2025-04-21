@@ -6,3 +6,9 @@ locales-add:
 
 locales-compile:
 	uv run manage.py compilemessages
+
+app-migrations:
+	uv run manage.py makemigrations
+
+app-migrate:
+	uv run manage.py migrate
