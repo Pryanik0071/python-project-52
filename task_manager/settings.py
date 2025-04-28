@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 from pathlib import Path
 import os
+from django.contrib import messages
 from dotenv import load_dotenv  # Импортируем environ
 
 
@@ -148,3 +149,11 @@ LOCALE_PATHS = (
 )
 
 LOGIN_URL = ''
+
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'danger',  # Изменяем 'error' на 'danger'
+}
