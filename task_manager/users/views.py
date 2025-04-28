@@ -1,11 +1,12 @@
 from django.contrib import messages
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from django.views import View
 
 from .forms import UserForm, LoginForm
+from task_manager.mixins import CustomLoginRequiredMixin, CustomCheckUserMixin
 
 
 class IndexView(View):
@@ -17,40 +18,61 @@ class IndexView(View):
         })
 
 
-class UserCreateView(View):
+class CreateView(View):
+
+    template = 'form.html'
+
+    def get_context_data(self, form):
+        return {'form': form,
+                'title': _('Registration'),
+                'button_text': _('Register')
+                }
 
     def get(self, request, *args, **kwargs):
         form = UserForm()
-        return render(request, 'users/create.html', {'form': form})
+        return render(request, self.template, self.get_context_data(form))
 
     def post(self, request, *args, **kwargs):
         form = UserForm(request.POST)
         if form.is_valid():
-            user = form.save()
-            login(request, user)
-        return redirect('/')
+            messages.add_message(request,
+                                 messages.SUCCESS,
+                                 _("User registered successfully"))
+            form.save()
+            return redirect('/login/')
+        return render(request, self.template, self.get_context_data(form))
 
 
-class UserUpdateView(View):
+class UpdateView(CustomLoginRequiredMixin, CustomCheckUserMixin):
+
+    template = 'form.html'
+
+    def get_context_data(self, form, user):
+        return {'form': form,
+                'user': user,
+                'title': _('Update user'),
+                'button_text': _('Update')
+                }
+
+    def get_user(self):
+        user_id = self.kwargs.get('pk')
+        return get_object_or_404(User, pk=user_id)
 
     def get(self, request, *args, **kwargs):
-        user_id = kwargs.get('pk')
-        user = User.objects.get(id=user_id)
+        user = self.get_user()
         form = UserForm(instance=user)
-        return render(request, 'users/update.html', {'form': form, 'user_id': user_id})
+        return render(request, self.template, self.get_context_data(form, user))
 
-    # def post(self, request, *args, **kwargs):
-    #     form = UserForm(request.POST)
-    #     if form.is_valid():
-    #         form.save()
-    #     return redirect('/')
-
-    # def get(self, request, *args, **kwargs):
-    #     category_id = kwargs.get('id')
-    #     category = Category.objects.get(id=category_id)
-    #     form = CategoryForm(instance=category)
-    #     return render(request, 'categories/update.html', {'form': form, 'category_id': category_id})
-
+    def post(self, request, *args, **kwargs):
+        user = self.get_user()
+        form = UserForm(request.POST, instance=user)
+        if form.is_valid():
+            messages.add_message(request,
+                                 messages.SUCCESS,
+                                 _("User successfully changed"))
+            form.save()
+            return redirect('/users/')
+        return render(request, self.template, self.get_context_data(form, user))
 
 class LoginView(View):
 
@@ -67,9 +89,9 @@ class LoginView(View):
                                 username=username,
                                 password=password)
             if user is not None:
-                login(request, user)
                 messages.add_message(request,
                                      messages.SUCCESS, _("You are login"))
+                login(request, user)
                 return redirect('/')
             else:
                 form.add_error(None,
@@ -83,4 +105,3 @@ def logout_view(request):
     messages.add_message(request,
                          messages.INFO, _("You are logout"))
     return redirect('/')
-    # Redirect to a success page.
