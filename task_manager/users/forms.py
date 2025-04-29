@@ -26,8 +26,3 @@ class UserForm(UserCreationForm):
         if User.objects.filter(username=username).exclude(pk=self.instance.pk).exists():
             raise ValidationError("This username is already taken.")
         return username
-
-
-class LoginForm(forms.Form):
-    username = forms.CharField(label=_('Username'))
-    password = forms.CharField(label=_('Password'), widget=forms.PasswordInput)

@@ -1,11 +1,10 @@
 from django.contrib import messages
-from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.models import User
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import gettext_lazy as _
 from django.views import View
 
-from .forms import UserForm, LoginForm
+from .forms import UserForm
 from task_manager.mixins import CustomLoginRequiredMixin, CustomCheckUserMixin
 
 
@@ -101,37 +100,3 @@ class DeleteView(CustomLoginRequiredMixin, CustomCheckUserMixin):
             user.delete()
             messages.success(request, _("User successfully deleted"))
         return redirect('/users/')
-
-
-# Пользователь успешно удален
-class LoginView(View):
-
-    def get(self, request, *args, **kwargs):
-        form = LoginForm()
-        return render(request, 'users/login.html', {'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = LoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(request,
-                                username=username,
-                                password=password)
-            if user is not None:
-                messages.add_message(request,
-                                     messages.SUCCESS, _("You are login"))
-                login(request, user)
-                return redirect('/')
-            else:
-                form.add_error(None,
-                               _("Please enter a valid username and password."
-                                 " Both fields may be case sensitive."))
-        return render(request, 'users/login.html', {'form': form})
-
-
-def logout_view(request):
-    logout(request)
-    messages.add_message(request,
-                         messages.INFO, _("You are logout"))
-    return redirect('/')
