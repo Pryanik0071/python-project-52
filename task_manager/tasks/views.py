@@ -1,74 +1,74 @@
-from django.contrib import messages
-from django.http import Http404
-from django.shortcuts import render, redirect
-from django.views import View
-
-from .models import Task
-from .forms import TaskForm
-
-
-class IndexView(View):
-
-    def get(self, request, *args, **kwargs):
-        tasks = Task.objects.all()
-        return render(request, 'tasks/index.html', context={
-            'tasks': tasks,
-        })
-
-
-class CreateView(View):
-
-    def get(self, request, *args, **kwargs):
-        form = TaskForm()
-        return render(request, 'tasks/create.html', {'form': form})
-
-    def post(self, request, *args, **kwargs):
-        form = TaskForm(request.POST)
-        if form.is_valid():
-            new_task = form.save(commit=False)
-            new_task.author = request.user
-            messages.success(request, "Статус успешно создан")
-            new_task.save()
-            return redirect('/tasks/')
-        return render(request, 'tasks/create.html', {'form': form})
-
-
-class UpdateView(View):
-
-    def get(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
-        status = Status.objects.get(id=pk)
-        form = StatusForm(instance=status)
-        return render(request, 'statuses/update.html', {'form': form, 'pk': pk})
-
-    def post(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
-        status = Status.objects.get(id=pk)
-        form = StatusForm(request.POST, instance=status)
-        if form.is_valid():
-            messages.success(request, "Статус успешно изменен")
-            form.save()
-            return redirect('/statuses/')
-        return render(request, 'statuses/update.html', {'form': form, 'pk': pk})
-
-
-class DeleteView(View):
-
-    def get(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
-        try:
-            status = Status.objects.get(id=pk)
-        except Status.DoesNotExist:
-            raise Http404
-        form = StatusForm(instance=status)
-        return render(request, 'statuses/delete.html', {'form': form,
-                                                        'name': status.name,
-                                                        'pk': pk})
-
-    def post(self, request, *args, **kwargs):
-        pk = kwargs.get('pk')
-        status = Status.objects.get(id=pk)
-        if status:
-            status.delete()
-            messages.success(request, "Статус успешно удален")
-        return redirect('/statuses/')
+# from django.contrib import messages
+# from django.http import Http404
+# from django.shortcuts import render, redirect
+# from django.views import View
+#
+# from .models import Task
+# from .forms import TaskForm
+#
+#
+# class IndexView(View):
+#
+#     def get(self, request, *args, **kwargs):
+#         tasks = Task.objects.all()
+#         return render(request, 'tasks/index.html', context={
+#             'tasks': tasks,
+#         })
+#
+#
+# class CreateView(View):
+#
+#     def get(self, request, *args, **kwargs):
+#         form = TaskForm()
+#         return render(request, 'tasks/create.html', {'form': form})
+#
+#     def post(self, request, *args, **kwargs):
+#         form = TaskForm(request.POST)
+#         if form.is_valid():
+#             new_task = form.save(commit=False)
+#             new_task.author = request.user
+#             messages.success(request, "Статус успешно создан")
+#             new_task.save()
+#             return redirect('/tasks/')
+#         return render(request, 'tasks/create.html', {'form': form})
+#
+#
+# class UpdateView(View):
+#
+#     def get(self, request, *args, **kwargs):
+#         pk = kwargs.get('pk')
+#         status = Status.objects.get(id=pk)
+#         form = StatusForm(instance=status)
+#         return render(request, 'statuses/update.html', {'form': form, 'pk': pk})
+#
+#     def post(self, request, *args, **kwargs):
+#         pk = kwargs.get('pk')
+#         status = Status.objects.get(id=pk)
+#         form = StatusForm(request.POST, instance=status)
+#         if form.is_valid():
+#             messages.success(request, "Статус успешно изменен")
+#             form.save()
+#             return redirect('/statuses/')
+#         return render(request, 'statuses/update.html', {'form': form, 'pk': pk})
+#
+#
+# class DeleteView(View):
+#
+#     def get(self, request, *args, **kwargs):
+#         pk = kwargs.get('pk')
+#         try:
+#             status = Status.objects.get(id=pk)
+#         except Status.DoesNotExist:
+#             raise Http404
+#         form = StatusForm(instance=status)
+#         return render(request, 'statuses/delete.html', {'form': form,
+#                                                         'name': status.name,
+#                                                         'pk': pk})
+#
+#     def post(self, request, *args, **kwargs):
+#         pk = kwargs.get('pk')
+#         status = Status.objects.get(id=pk)
+#         if status:
+#             status.delete()
+#             messages.success(request, "Статус успешно удален")
+#         return redirect('/statuses/')

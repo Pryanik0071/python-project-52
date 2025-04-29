@@ -23,5 +23,5 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='users'),
     path('create/', views.CreateView.as_view(), name='user_create'),
     path('<int:pk>/update/', views.UpdateView.as_view(), name='user_update'),
-    path('<int:pk>/delete/', views.UpdateView.as_view(), name='user_delete'),
+    path('<int:pk>/delete/', views.DeleteView.as_view(), name='user_delete'),
 ]
