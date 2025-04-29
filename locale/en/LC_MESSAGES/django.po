@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-28 19:58+0000\n"
+"POT-Creation-Date: 2025-04-29 16:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -48,11 +48,12 @@ msgstr ""
 msgid "Delete status"
 msgstr ""
 
-#: task_manager/templates/statuses/delete.html:7
+#: task_manager/templates/statuses/delete.html:7 task_manager/users/views.py:90
 msgid "Are you sure you want to delete"
 msgstr ""
 
 #: task_manager/templates/statuses/delete.html:11
+#: task_manager/users/views.py:91
 msgid "Yes, delete"
 msgstr ""
 
@@ -80,7 +81,7 @@ msgid "Update status"
 msgstr ""
 
 #: task_manager/templates/statuses/update.html:12
-#: task_manager/templates/users/update.html:12 task_manager/users/views.py:55
+#: task_manager/users/views.py:54
 msgid "Update"
 msgstr ""
 
@@ -104,10 +105,6 @@ msgstr ""
 msgid "Log"
 msgstr ""
 
-#: task_manager/templates/users/update.html:7 task_manager/users/views.py:54
-msgid "Update user"
-msgstr ""
-
 #: task_manager/users/forms.py:11
 msgid "First name"
 msgstr ""
@@ -120,32 +117,44 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
-#: task_manager/users/views.py:28
+#: task_manager/users/views.py:27
 msgid "Registration"
 msgstr ""
 
-#: task_manager/users/views.py:29
+#: task_manager/users/views.py:28
 msgid "Register"
 msgstr ""
 
-#: task_manager/users/views.py:41
+#: task_manager/users/views.py:40
 msgid "User registered successfully"
 msgstr ""
 
-#: task_manager/users/views.py:83
+#: task_manager/users/views.py:53
+msgid "Update user"
+msgstr ""
+
+#: task_manager/users/views.py:72
 msgid "User successfully changed"
 msgstr ""
 
-#: task_manager/users/views.py:111
+#: task_manager/users/views.py:89
+msgid "Delete user"
+msgstr ""
+
+#: task_manager/users/views.py:102
+msgid "User successfully deleted"
+msgstr ""
+
+#: task_manager/users/views.py:123
 msgid "You are login"
 msgstr ""
 
-#: task_manager/users/views.py:116
+#: task_manager/users/views.py:128
 msgid ""
 "Please enter a valid username and password. Both fields may be case "
 "sensitive."
 msgstr ""
 
-#: task_manager/users/views.py:124
+#: task_manager/users/views.py:136
 msgid "You are logout"
 msgstr ""

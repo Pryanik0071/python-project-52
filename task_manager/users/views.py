@@ -74,6 +74,36 @@ class UpdateView(CustomLoginRequiredMixin, CustomCheckUserMixin):
             return redirect('/users/')
         return render(request, self.template, self.get_context_data(form, user))
 
+
+class DeleteView(CustomLoginRequiredMixin, CustomCheckUserMixin):
+
+    template = 'users/delete.html'
+
+    def get_user(self):
+        user_id = self.kwargs.get('pk')
+        return get_object_or_404(User, pk=user_id)
+
+    def get_context_data(self, user):
+        return {
+            'user': user,
+            'title': _('Delete user'),
+            'text': _('Are you sure you want to delete'),
+            'button_text': _('Yes, delete')
+        }
+
+    def get(self, request, *args, **kwargs):
+        user = self.get_user()
+        return render(request, self.template, self.get_context_data(user))
+
+    def post(self, request, *args, **kwargs):
+        user = self.get_user()
+        if user:
+            user.delete()
+            messages.success(request, _("User successfully deleted"))
+        return redirect('/users/')
+
+
+# Пользователь успешно удален
 class LoginView(View):
 
     def get(self, request, *args, **kwargs):
