@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-29 16:33+0000\n"
+"POT-Creation-Date: 2025-05-03 19:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,62 +38,72 @@ msgstr "У вас нет прав для изменения другого по�
 
 #: task_manager/statuses/models.py:6
 msgid "Name"
-msgstr ""
+msgstr "Имя"
 
-#: task_manager/templates/base.html:31
-#: task_manager/templates/statuses/index.html:14
-msgid "Statuses"
-msgstr ""
-
-#: task_manager/templates/statuses/create.html:7
-#: task_manager/templates/statuses/index.html:15
+#: task_manager/statuses/views.py:23
+#: task_manager/templates/statuses/index.html:13
 msgid "Create status"
-msgstr ""
+msgstr "Создать статус"
 
-#: task_manager/templates/statuses/create.html:12
+#: task_manager/statuses/views.py:24
 msgid "Create"
-msgstr ""
+msgstr "Создать"
 
-#: task_manager/templates/statuses/delete.html:6
+#: task_manager/statuses/views.py:36
+msgid "Status created successfully"
+msgstr "Статус успешно создан"
+
+#: task_manager/statuses/views.py:49
+msgid "Update status"
+msgstr "Изменение статуса"
+
+#: task_manager/statuses/views.py:50 task_manager/users/views.py:53
+msgid "Update"
+msgstr "Изменить"
+
+#: task_manager/statuses/views.py:68
+msgid "Status successfully changed"
+msgstr "Статус успешно изменен"
+
+#: task_manager/statuses/views.py:83
 msgid "Delete status"
-msgstr ""
+msgstr "Удаление статуса"
 
-#: task_manager/templates/statuses/delete.html:7 task_manager/users/views.py:89
+#: task_manager/statuses/views.py:84 task_manager/users/views.py:89
 msgid "Are you sure you want to delete"
 msgstr "Вы уверены, что хотите удалить"
 
-#: task_manager/templates/statuses/delete.html:11
-#: task_manager/users/views.py:90
+#: task_manager/statuses/views.py:85 task_manager/users/views.py:90
 msgid "Yes, delete"
 msgstr "Да, удалить"
 
-#: task_manager/templates/statuses/index.html:21
+#: task_manager/statuses/views.py:96
+msgid "Status successfully deleted"
+msgstr "Статус успешно удален"
+
+#: task_manager/templates/base.html:31
+#: task_manager/templates/statuses/index.html:11
+msgid "Statuses"
+msgstr "Статусы"
+
+#: task_manager/templates/statuses/index.html:19
 msgid "Status Name"
 msgstr ""
 
-#: task_manager/templates/statuses/index.html:22
+#: task_manager/templates/statuses/index.html:20
 #: task_manager/templates/users/index.html:19
 msgid "Date"
 msgstr "Дата создания"
 
-#: task_manager/templates/statuses/index.html:33
+#: task_manager/templates/statuses/index.html:31
 #: task_manager/templates/users/index.html:31
 msgid "Edit"
 msgstr "Изменить"
 
-#: task_manager/templates/statuses/index.html:35
+#: task_manager/templates/statuses/index.html:33
 #: task_manager/templates/users/index.html:33
 msgid "Delete"
 msgstr "Удалить"
-
-#: task_manager/templates/statuses/update.html:7
-msgid "Update status"
-msgstr ""
-
-#: task_manager/templates/statuses/update.html:12
-#: task_manager/users/views.py:53
-msgid "Update"
-msgstr "Изменить"
 
 #: task_manager/templates/users/index.html:11
 msgid "Users"
