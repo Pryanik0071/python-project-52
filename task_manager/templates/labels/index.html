@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% load i18n %}
+
+{% block content %}
+
+  <div class="container wrapper flex-grow-1">
+
+    {% include 'message.html' %}
+
+    <h1 class="my-4">{% trans 'Labels' %}</h1>
+
+    <a class="btn btn-primary mb-3" href="{% url 'labels_create' %}">{% trans 'Create label' %}</a>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>{% trans 'Label Name' %}</th>
+          <th>{% trans 'Date' %}</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for label in labels %}
+        <tr>
+          <td>{{ label.id }}</td>
+          <td>{{ label.name }}</td>
+          <td>{{ label.inserted_timestamp|date:"d.m.Y H:i" }}</td>
+          <td>
+            <a href="{% url 'labels_update' pk=label.id %}">{% trans 'Edit' %}</a>
+            <br />
+            <a href="{% url 'labels_delete' pk=label.id %}">{% trans 'Delete' %}</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

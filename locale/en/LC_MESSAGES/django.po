@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-03 19:40+0000\n"
+"POT-Creation-Date: 2025-05-05 17:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,6 +26,53 @@ msgstr ""
 msgid "Password"
 msgstr ""
 
+#: task_manager/labels/models.py:6 task_manager/statuses/models.py:6
+msgid "Name"
+msgstr ""
+
+#: task_manager/labels/views.py:23 task_manager/templates/labels/index.html:13
+msgid "Create label"
+msgstr ""
+
+#: task_manager/labels/views.py:24 task_manager/statuses/views.py:24
+msgid "Create"
+msgstr ""
+
+#: task_manager/labels/views.py:36
+msgid "Label created successfully"
+msgstr ""
+
+#: task_manager/labels/views.py:49
+msgid "Update label"
+msgstr ""
+
+#: task_manager/labels/views.py:50 task_manager/statuses/views.py:50
+#: task_manager/users/views.py:53
+msgid "Update"
+msgstr ""
+
+#: task_manager/labels/views.py:68
+msgid "Label successfully changed"
+msgstr ""
+
+#: task_manager/labels/views.py:83
+msgid "Delete label"
+msgstr ""
+
+#: task_manager/labels/views.py:84 task_manager/statuses/views.py:84
+#: task_manager/users/views.py:89
+msgid "Are you sure you want to delete"
+msgstr ""
+
+#: task_manager/labels/views.py:85 task_manager/statuses/views.py:85
+#: task_manager/users/views.py:90
+msgid "Yes, delete"
+msgstr ""
+
+#: task_manager/labels/views.py:96
+msgid "Label successfully deleted"
+msgstr ""
+
 #: task_manager/mixins.py:17
 msgid "You are not logged in! Please sign in."
 msgstr ""
@@ -34,17 +81,9 @@ msgstr ""
 msgid "You do not have permission to modify this user."
 msgstr ""
 
-#: task_manager/statuses/models.py:6
-msgid "Name"
-msgstr ""
-
 #: task_manager/statuses/views.py:23
 #: task_manager/templates/statuses/index.html:13
 msgid "Create status"
-msgstr ""
-
-#: task_manager/statuses/views.py:24
-msgid "Create"
 msgstr ""
 
 #: task_manager/statuses/views.py:36
@@ -55,24 +94,12 @@ msgstr ""
 msgid "Update status"
 msgstr ""
 
-#: task_manager/statuses/views.py:50 task_manager/users/views.py:53
-msgid "Update"
-msgstr ""
-
 #: task_manager/statuses/views.py:68
 msgid "Status successfully changed"
 msgstr ""
 
 #: task_manager/statuses/views.py:83
 msgid "Delete status"
-msgstr ""
-
-#: task_manager/statuses/views.py:84 task_manager/users/views.py:89
-msgid "Are you sure you want to delete"
-msgstr ""
-
-#: task_manager/statuses/views.py:85 task_manager/users/views.py:90
-msgid "Yes, delete"
 msgstr ""
 
 #: task_manager/statuses/views.py:96
@@ -84,23 +111,35 @@ msgstr ""
 msgid "Statuses"
 msgstr ""
 
-#: task_manager/templates/statuses/index.html:19
-msgid "Status Name"
+#: task_manager/templates/base.html:34
+#: task_manager/templates/labels/index.html:11
+msgid "Labels"
 msgstr ""
 
+#: task_manager/templates/labels/index.html:19
+msgid "Label Name"
+msgstr ""
+
+#: task_manager/templates/labels/index.html:20
 #: task_manager/templates/statuses/index.html:20
 #: task_manager/templates/users/index.html:19
 msgid "Date"
 msgstr ""
 
+#: task_manager/templates/labels/index.html:31
 #: task_manager/templates/statuses/index.html:31
 #: task_manager/templates/users/index.html:31
 msgid "Edit"
 msgstr ""
 
+#: task_manager/templates/labels/index.html:33
 #: task_manager/templates/statuses/index.html:33
 #: task_manager/templates/users/index.html:33
 msgid "Delete"
+msgstr ""
+
+#: task_manager/templates/statuses/index.html:19
+msgid "Status Name"
 msgstr ""
 
 #: task_manager/templates/users/index.html:11
