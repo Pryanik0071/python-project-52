@@ -12,3 +12,9 @@ app-migrations:
 
 app-migrate:
 	uv run manage.py migrate
+
+build:
+	./build.sh
+
+render-start:
+	gunicorn task_manager.wsgi
