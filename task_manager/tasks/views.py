@@ -1,6 +1,8 @@
 from django.contrib import messages
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.translation import gettext_lazy as _
+from django_filters.views import FilterView
+from .filters import TaskFilter
 
 from .models import Task
 from .forms import TaskForm
@@ -13,11 +15,15 @@ class BaseTaskView(CustomLoginRequiredMixin):
         return get_object_or_404(Task, pk=pk)
 
 
-class IndexView(CustomLoginRequiredMixin):
-
-    def get(self, request, *args, **kwargs):
-        tasks = Task.objects.all()
-        return render(request, 'tasks/index.html', {'tasks': tasks})
+class IndexView(CustomLoginRequiredMixin, FilterView):
+    template_name = 'tasks/index.html'
+    model = Task
+    filterset_class = TaskFilter
+    context_object_name = 'tasks'
+    extra_context = {
+        'title': _('Tasks'),
+        'button_text': _('Show'),
+    }
 
 
 class CreateView(CustomLoginRequiredMixin):

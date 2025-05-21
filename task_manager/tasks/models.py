@@ -19,3 +19,6 @@ class Task(models.Model):
         Label, related_name="tasks", verbose_name=_("Labels")
     )
     inserted_timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name

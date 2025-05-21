@@ -2,6 +2,8 @@
 
 {% load i18n %}
 
+{% load django_bootstrap5 %}
+
 {% block content %}
 
   <div class="container wrapper flex-grow-1">
@@ -11,6 +13,15 @@
     <h1 class="my-4">{% trans 'Tasks' %}</h1>
 
     <a class="btn btn-primary mb-3" href="{% url 'tasks_create' %}">{% trans 'Create task' %}</a>
+
+    <div class="card mb-3">
+      <div class="card-body bg-light">
+         <form class="form-inline center" method="get">
+           {% bootstrap_form filter.form field_class="ml-2 mr-3" %}
+           <button type="submit" class="btn btn-primary">{% trans "Show" %}</button>
+         </form>
+      </div>
+    </div>
 
     <table class="table table-striped">
       <thead>
