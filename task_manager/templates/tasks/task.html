@@ -10,10 +10,10 @@
     <h1 class="my-4">Просмотр задачи</h1>
     <div class="card">
       <div class="card-header bg-secondary text-white">
-        <h2>Имя</h2>
+        <h2>{{ task.name }}</h2>
       </div>
       <div class="card-body bg-light">
-        <p>Описание</p>
+        <p>{{ task.description }}</p>
         <hr>
         <div class="container">
           <div class="row p-1">
@@ -22,7 +22,11 @@
           </div>
           <div class="row p-1">
             <div class="col">{% trans 'Executor' %}</div>
-            <div class="col">{{ task.executor.first_name }} {{ task.executor.last_name }}</div>
+            {% if task.executor %}
+              <div class="col">{{ task.executor.first_name }} {{ task.executor.last_name }}</div>
+            {% else %}
+              <div class="col">None</div>
+            {% endif %}
           </div>
           <div class="row p-1">
             <div class="col">{% trans 'Status' %}</div>
