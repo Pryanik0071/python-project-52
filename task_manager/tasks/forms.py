@@ -17,5 +17,11 @@ class TaskForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Отсортировать пользователей по id
-        self.fields['executor'].queryset = User.objects.all().order_by('id')
+
+        # Создаем список выбора с пустым элементом и полными именами
+        users = User.objects.order_by('id')
+        choices = [('', '---------')]  # Пустой выбор
+        choices += [(user.id, f"{user.first_name} {user.last_name}") for user in users]
+
+        # Настраиваем виджет
+        self.fields['executor'].widget = forms.Select(choices=choices)
