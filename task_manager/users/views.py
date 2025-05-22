@@ -12,7 +12,7 @@ from task_manager.tasks.models import Task
 class IndexView(View):
 
     def get(self, request, *args, **kwargs):
-        users = User.objects.all()
+        users = User.objects.all().order_by('id')
         return render(request, 'users/index.html', context={
             'users': users,
         })
