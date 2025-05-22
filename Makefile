@@ -21,3 +21,6 @@ render-start:
 
 install:
 	uv sync
+
+test:
+	PYTHONPATH=. .venv/bin/pytest
