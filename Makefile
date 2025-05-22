@@ -17,7 +17,7 @@ build:
 	./build.sh
 
 render-start:
-	/opt/render/project/src/.venv/bin/gunicorn task_manager.wsgi:application
+	/opt/render/project/src/gunicorn task_manager.wsgi:application
 
 install:
 	uv sync
