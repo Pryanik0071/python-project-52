@@ -12,7 +12,7 @@ class UserFullNameChoiceField(forms.ModelChoiceField):
 
 
 class UserFullNameModelChoiceFilter(django_filters.ModelChoiceFilter):
-      field_class = UserFullNameChoiceField
+    field_class = UserFullNameChoiceField
 
 
 class TaskFilter(django_filters.FilterSet):

@@ -23,6 +23,7 @@ class UserForm(UserCreationForm):
     def clean_username(self):
         username = self.cleaned_data['username']
         # Check if the username already exists, excluding the current user
-        if User.objects.filter(username=username).exclude(pk=self.instance.pk).exists():
+        if User.objects.filter(
+                username=username).exclude(pk=self.instance.pk).exists():
             raise ValidationError("This username is already taken.")
         return username
