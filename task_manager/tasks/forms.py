@@ -21,7 +21,9 @@ class TaskForm(forms.ModelForm):
         # Создаем список выбора с пустым элементом и полными именами
         users = User.objects.order_by('id')
         choices = [('', '---------')]  # Пустой выбор
-        choices += [(user.id, f"{user.first_name} {user.last_name}") for user in users]
+        choices += [
+            (user.id, f"{user.first_name} {user.last_name}") for user in users
+        ]
 
         # Настраиваем виджет
         self.fields['executor'].widget = forms.Select(choices=choices)

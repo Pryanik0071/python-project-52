@@ -24,7 +24,9 @@ class CustomCheckUserMixin(UserPassesTestMixin, View):
         return self.get_user() == self.request.user
 
     def handle_no_permission(self):
-        messages.add_message(self.request,
-                             messages.ERROR,
-                             _("You do not have permission to modify this user."))
+        messages.add_message(
+            self.request,
+            messages.ERROR,
+            _("You do not have permission to modify this user.")
+        )
         return redirect('/users/')

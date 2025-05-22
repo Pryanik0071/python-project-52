@@ -58,7 +58,9 @@ class UpdateView(CustomLoginRequiredMixin):
     def get(self, request, *args, **kwargs):
         label = self.get_label()
         form = LabelForm(instance=label)
-        return render(request, self.template, self.get_context_data(form, label))
+        return render(
+            request, self.template, self.get_context_data(form, label)
+        )
 
     def post(self, request, *args, **kwargs):
         label = self.get_label()
@@ -69,7 +71,9 @@ class UpdateView(CustomLoginRequiredMixin):
                                  _("Label successfully changed"))
             form.save()
             return redirect('/labels/')
-        return render(request, self.template, self.get_context_data(form, label))
+        return render(
+            request, self.template, self.get_context_data(form, label)
+        )
 
 
 class DeleteView(CustomLoginRequiredMixin):
@@ -88,13 +92,18 @@ class DeleteView(CustomLoginRequiredMixin):
 
     def get(self, request, *args, **kwargs):
         label = self.get_label()
-        return render(request, 'labels/delete.html', self.get_context_data(label))
+        return render(
+            request, 'labels/delete.html', self.get_context_data(label)
+        )
 
     def post(self, request, *args, **kwargs):
         label = self.get_label()
         if label:
             if Task.objects.filter(labels=label).exists():
-                messages.error(request, _("Cannot delete label because it is in use."))
+                messages.error(
+                    request,
+                    _("Cannot delete label because it is in use.")
+                )
                 return redirect('/labels/')
             else:
                 label.delete()

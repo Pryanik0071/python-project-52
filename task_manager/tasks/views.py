@@ -46,7 +46,8 @@ class CreateView(CustomLoginRequiredMixin):
 
     def get(self, request, *args, **kwargs):
         form = TaskForm()
-        return render(request, self.template, self.get_context_data(form))
+        return render(request, self.template,
+                      self.get_context_data(form))
 
     def post(self, request, *args, **kwargs):
         form = TaskForm(request.POST)
@@ -59,7 +60,8 @@ class CreateView(CustomLoginRequiredMixin):
                                  messages.SUCCESS,
                                  _("Task created successfully"))
             return redirect('/tasks/')
-        return render(request, self.template, self.get_context_data(form))
+        return render(request, self.template,
+                      self.get_context_data(form))
 
 
 class UpdateView(BaseTaskView):
@@ -76,7 +78,8 @@ class UpdateView(BaseTaskView):
     def get(self, request, *args, **kwargs):
         task = self.get_task()
         form = TaskForm(instance=task)
-        return render(request, self.template, self.get_context_data(form, task))
+        return render(request, self.template,
+                      self.get_context_data(form, task))
 
     def post(self, request, *args, **kwargs):
         task = self.get_task()
@@ -87,7 +90,8 @@ class UpdateView(BaseTaskView):
                                  _("Task successfully changed"))
             form.save()
             return redirect('/tasks/')
-        return render(request, self.template, self.get_context_data(form, task))
+        return render(request, self.template,
+                      self.get_context_data(form, task))
 
 
 class DeleteView(BaseTaskView):
@@ -105,7 +109,8 @@ class DeleteView(BaseTaskView):
         if task.author != self.request.user:
             messages.error(request, _("Only the author can delete the task"))
             return redirect('/tasks/')
-        return render(request, 'tasks/delete.html', self.get_context_data(task))
+        return render(request, 'tasks/delete.html',
+                      self.get_context_data(task))
 
     def post(self, request, *args, **kwargs):
         task = self.get_task()

@@ -58,7 +58,8 @@ class UpdateView(CustomLoginRequiredMixin):
     def get(self, request, *args, **kwargs):
         status = self.get_status()
         form = StatusForm(instance=status)
-        return render(request, self.template, self.get_context_data(form, status))
+        return render(request, self.template,
+                      self.get_context_data(form, status))
 
     def post(self, request, *args, **kwargs):
         status = self.get_status()
@@ -69,7 +70,8 @@ class UpdateView(CustomLoginRequiredMixin):
                                  _("Status successfully changed"))
             form.save()
             return redirect('/statuses/')
-        return render(request, self.template, self.get_context_data(form, status))
+        return render(request, self.template,
+                      self.get_context_data(form, status))
 
 
 class DeleteView(CustomLoginRequiredMixin):
@@ -88,13 +90,16 @@ class DeleteView(CustomLoginRequiredMixin):
 
     def get(self, request, *args, **kwargs):
         status = self.get_status()
-        return render(request, 'statuses/delete.html', self.get_context_data(status))
+        return render(request, 'statuses/delete.html',
+                      self.get_context_data(status))
 
     def post(self, request, *args, **kwargs):
         status = self.get_status()
         if status:
             if Task.objects.filter(status=status).exists():
-                messages.error(request, _("Cannot delete status because it is in use."))
+                messages.error(
+                    request, _("Cannot delete status because it is in use.")
+                )
                 return redirect('/statuses/')
             else:
                 status.delete()

@@ -30,7 +30,8 @@ class CreateView(View):
 
     def get(self, request, *args, **kwargs):
         form = UserForm()
-        return render(request, self.template, self.get_context_data(form))
+        return render(request, self.template,
+                      self.get_context_data(form))
 
     def post(self, request, *args, **kwargs):
         form = UserForm(request.POST)
@@ -40,7 +41,8 @@ class CreateView(View):
                                  _("User registered successfully"))
             form.save()
             return redirect('/login/')
-        return render(request, self.template, self.get_context_data(form))
+        return render(request, self.template,
+                      self.get_context_data(form))
 
 
 class UpdateView(CustomLoginRequiredMixin, CustomCheckUserMixin):
@@ -61,7 +63,8 @@ class UpdateView(CustomLoginRequiredMixin, CustomCheckUserMixin):
     def get(self, request, *args, **kwargs):
         user = self.get_user()
         form = UserForm(instance=user)
-        return render(request, self.template, self.get_context_data(form, user))
+        return render(request, self.template,
+                      self.get_context_data(form, user))
 
     def post(self, request, *args, **kwargs):
         user = self.get_user()
@@ -72,7 +75,8 @@ class UpdateView(CustomLoginRequiredMixin, CustomCheckUserMixin):
                                  _("User successfully changed"))
             form.save()
             return redirect('/users/')
-        return render(request, self.template, self.get_context_data(form, user))
+        return render(request, self.template,
+                      self.get_context_data(form, user))
 
 
 class DeleteView(CustomLoginRequiredMixin, CustomCheckUserMixin):
@@ -93,14 +97,19 @@ class DeleteView(CustomLoginRequiredMixin, CustomCheckUserMixin):
 
     def get(self, request, *args, **kwargs):
         user = self.get_user()
-        return render(request, self.template, self.get_context_data(user))
+        return render(request, self.template,
+                      self.get_context_data(user))
 
     def post(self, request, *args, **kwargs):
         user = self.get_user()
         if user:
-            if Task.objects.filter(author=user).exists() or Task.objects.filter(executor=user).exists():
-                messages.error(request, _("Cannot delete user because they are assigned to tasks."))
-                return redirect('/users/')  # Перенаправляем обратно на список пользователей
+            if Task.objects.filter(author=user).exists() or \
+                    Task.objects.filter(executor=user).exists():
+                messages.error(
+                    request,
+                    _("Cannot delete user because they are assigned to tasks.")
+                )
+                return redirect('/users/')
             else:
                 user.delete()
                 messages.success(request, _("User successfully deleted"))
