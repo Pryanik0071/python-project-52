@@ -14,6 +14,7 @@ from pathlib import Path
 import os
 from django.contrib import messages
 from dotenv import load_dotenv  # Импортируем environ
+import dj_database_url
 
 
 load_dotenv()  # Загрузка переменных окружения из файла .env
@@ -92,7 +93,10 @@ WSGI_APPLICATION = 'task_manager.wsgi.application'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 DATABASES = {
-    "default": os.getenv("DEBUG", False),
+    "default": dj_database_url.config(
+        default=os.getenv("DATABASE_URL"),
+        conn_max_age=600  # Опционально: время жизни подключения
+    )
 }
 
 # Password validation
