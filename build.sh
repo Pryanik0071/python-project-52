@@ -2,6 +2,7 @@
 # скачиваем uv
 curl -LsSf https://astral.sh/uv/install.sh | sh
 source ~/.local/bin/env
+uv venv .venv
 uv pip install -r pyproject.toml
 
 # здесь добавьте все необходимые команды для установки вашего проекта
