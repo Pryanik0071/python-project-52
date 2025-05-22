@@ -41,8 +41,8 @@
           <td>{{ task.id }}</td>
           <td>{{ task.name }}</td>
           <th>{{ task.status }}</th>
-          <th>{{ task.author }}</th>
-          <th>{{ task.executor }}</th>
+          <th>{{ task.author.first_name }} {{ task.author.last_name }}</th>
+          <th>{{ task.executor.first_name }} {{ task.executor.last_name }}</th>
           <td>{{ task.inserted_timestamp|date:"d.m.Y H:i" }}</td>
           <td>
             <a href="{% url 'tasks_update' pk=task.id %}">{% trans 'Edit' %}</a>
