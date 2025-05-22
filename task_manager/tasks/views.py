@@ -15,7 +15,7 @@ class BaseTaskView(CustomLoginRequiredMixin):
         return get_object_or_404(Task, pk=pk)
 
 
-class IndexView(CustomLoginRequiredMixin, FilterView):
+class IndexViewList(CustomLoginRequiredMixin, FilterView):
     template_name = 'tasks/index.html'
     model = Task
     filterset_class = TaskFilter
@@ -24,6 +24,14 @@ class IndexView(CustomLoginRequiredMixin, FilterView):
         'title': _('Tasks'),
         'button_text': _('Show'),
     }
+
+
+class IndexView(BaseTaskView):
+    template = 'tasks/task.html'
+
+    def get(self, request, *args, **kwargs):
+        task = self.get_task()
+        return render(request, self.template, {'task': task})
 
 
 class CreateView(CustomLoginRequiredMixin):
