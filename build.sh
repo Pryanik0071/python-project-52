@@ -1,15 +1,8 @@
 #!/usr/bin/env bash
-# Установка UV и создание окружения
+# скачиваем uv
 curl -LsSf https://astral.sh/uv/install.sh | sh
-source "$HOME/.cargo/env"
-source ~/.local/bin/env
-uv venv .venv
+source $HOME/.local/bin/env
 
-# Установка зависимостей через UV (аналог `uv sync`)
-uv pip install -r pyproject.toml
-
-# Применение миграций и сбор статики
-.venv/bin/python manage.py migrate --noinput
-
-# Сделать gunicorn исполняемым
-find /opt/render/project/src/.venv/bin -type f -executable -exec chmod +x {} \;
+# здесь добавьте все необходимые команды для установки вашего проекта
+# команду установки зависимостей, сборки статики, применения миграций и другие
+make install && make migrate
