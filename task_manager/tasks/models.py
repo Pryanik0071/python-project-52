@@ -13,10 +13,19 @@ class Task(models.Model):
     status = models.ForeignKey(Status, on_delete=models.PROTECT, verbose_name=_("Status"))
     author = models.ForeignKey(User, related_name='authored_tasks',  on_delete=models.PROTECT,
                                verbose_name=_("Author"))
-    executor = models.ForeignKey(User, related_name='executed_tasks', on_delete=models.PROTECT,
-                                 verbose_name=_("Executor"))
+    executor = models.ForeignKey(
+        User,
+        related_name='executed_tasks',
+        on_delete=models.PROTECT,
+        verbose_name=_("Executor"),
+        blank=True,
+        null=True
+    )
     labels = models.ManyToManyField(
-        Label, related_name="tasks", verbose_name=_("Labels")
+        Label,
+        related_name="tasks",
+        verbose_name=_("Labels"),
+        blank=True,
     )
     inserted_timestamp = models.DateTimeField(auto_now_add=True)
 

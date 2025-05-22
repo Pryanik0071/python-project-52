@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-05-22 13:26+0000\n"
+"POT-Creation-Date: 2025-05-22 14:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -120,11 +120,16 @@ msgstr "Невозможно удалить статус, потому что о
 msgid "Status successfully deleted"
 msgstr "Статус успешно удален"
 
-#: task_manager/tasks/filters.py:11
+#: task_manager/tasks/filters.py:21 task_manager/tasks/models.py:20
+#: task_manager/templates/tasks/index.html:33
+msgid "Executor"
+msgstr "Исполнитель"
+
+#: task_manager/tasks/filters.py:26
 msgid "Label"
 msgstr "Метка"
 
-#: task_manager/tasks/filters.py:15
+#: task_manager/tasks/filters.py:30
 msgid "Only own tasks"
 msgstr "Только свои задачи"
 
@@ -140,11 +145,7 @@ msgstr "Статус"
 msgid "Author"
 msgstr "Автор"
 
-#: task_manager/tasks/models.py:17 task_manager/templates/tasks/index.html:33
-msgid "Executor"
-msgstr "Исполнитель"
-
-#: task_manager/tasks/models.py:19 task_manager/templates/base.html:34
+#: task_manager/tasks/models.py:27 task_manager/templates/base.html:34
 #: task_manager/templates/labels/index.html:11
 msgid "Labels"
 msgstr "Метки"
@@ -164,7 +165,7 @@ msgstr "Создать задачу"
 
 #: task_manager/tasks/views.py:52
 msgid "Task created successfully"
-msgstr "Статус успешно создан"
+msgstr "Задача успешно создана"
 
 #: task_manager/tasks/views.py:64
 msgid "Update task"
