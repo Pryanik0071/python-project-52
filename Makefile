@@ -1,5 +1,5 @@
 app-run:
-	uv run manage.py runserver
+	uv run manage.py runserver 127.0.0.1:8000
 
 locales-add:
 	uv run manage.py makemessages -a
