@@ -7,10 +7,10 @@ locales-add:
 locales-compile:
 	uv run manage.py compilemessages
 
-app-migrations:
+migrations:
 	uv run manage.py makemigrations
 
-app-migrate:
+migrate:
 	uv run manage.py migrate
 
 build:
