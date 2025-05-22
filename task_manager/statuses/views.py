@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from .models import Status
 from .forms import StatusForm
 from task_manager.mixins import CustomLoginRequiredMixin
+from task_manager.tasks.models import Task
 
 
 class IndexView(CustomLoginRequiredMixin):
@@ -92,6 +93,10 @@ class DeleteView(CustomLoginRequiredMixin):
     def post(self, request, *args, **kwargs):
         status = self.get_status()
         if status:
-            status.delete()
-            messages.success(request, _("Status successfully deleted"))
+            if Task.objects.filter(status=status).exists():
+                messages.error(request, _("Cannot delete status because it is in use."))
+                return redirect('/statuses/')
+            else:
+                status.delete()
+                messages.success(request, _("Status successfully deleted"))
         return redirect('/statuses/')

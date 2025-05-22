@@ -6,6 +6,7 @@ from django.views import View
 
 from .forms import UserForm
 from task_manager.mixins import CustomLoginRequiredMixin, CustomCheckUserMixin
+from task_manager.tasks.models import Task
 
 
 class IndexView(View):
@@ -97,6 +98,10 @@ class DeleteView(CustomLoginRequiredMixin, CustomCheckUserMixin):
     def post(self, request, *args, **kwargs):
         user = self.get_user()
         if user:
-            user.delete()
-            messages.success(request, _("User successfully deleted"))
+            if Task.objects.filter(author=user).exists() or Task.objects.filter(executor=user).exists():
+                messages.error(request, _("Cannot delete user because they are assigned to tasks."))
+                return redirect('/users/')  # Перенаправляем обратно на список пользователей
+            else:
+                user.delete()
+                messages.success(request, _("User successfully deleted"))
         return redirect('/users/')

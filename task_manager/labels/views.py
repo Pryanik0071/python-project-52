@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from .models import Label
 from .forms import LabelForm
 from task_manager.mixins import CustomLoginRequiredMixin
+from task_manager.tasks.models import Task
 
 
 class IndexView(CustomLoginRequiredMixin):
@@ -92,6 +93,10 @@ class DeleteView(CustomLoginRequiredMixin):
     def post(self, request, *args, **kwargs):
         label = self.get_label()
         if label:
-            label.delete()
-            messages.success(request, _("Label successfully deleted"))
+            if Task.objects.filter(labels=label).exists():
+                messages.error(request, _("Cannot delete label because it is in use."))
+                return redirect('/labels/')
+            else:
+                label.delete()
+                messages.success(request, _("Label successfully deleted"))
         return redirect('/labels/')
