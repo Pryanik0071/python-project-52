@@ -32,7 +32,7 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", False)
 
-ENVIRONMENT = os.getenv("DJANGO_ENV", "dev")
+ENVIRONMENT = os.getenv("DJANGO_ENV", "test")
 
 ALLOWED_HOSTS = ['python-project-52-r4q7.onrender.com', 'localhost', '127.0.0.1', 'webserver']
 
