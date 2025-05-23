@@ -18,14 +18,14 @@ class UserTestCase(TestCase):
             "first_name": "F Name",
             "last_name": "L Name",
             "username": "login1",
-            "password1": "ASD123g",
-            "password2": "ASD123g"
+            "password1": "ASD123g",  # NOSONAR
+            "password2": "ASD123g"  # NOSONAR
         }
 
         self.update_data = {
             "first_name": "F Name2",
             "last_name": "L Name2",
             "username": "login2",
-            "password1": "lpak12",
-            "password2": "lpak12"
+            "password1": "lpak12",  # NOSONAR
+            "password2": "lpak12"  # NOSONAR
         }

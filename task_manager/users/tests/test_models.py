@@ -112,8 +112,8 @@ class TestUserUpdateView(UserTestCase):
             'first_name': 'TestName',
             'last_name': 'LTestName',
             'username': 'loin13',
-            'password1': 'asdF12',
-            'password2': 'asdF12',
+            'password1': 'asdF12',  # NOSONAR
+            'password2': 'asdF12',  # NOSONAR
         }
 
         response = self.client.get(
@@ -147,8 +147,8 @@ class TestUserUpdateView(UserTestCase):
             'first_name': 'FName112',
             'last_name': 'LName223',
             'username': 'hyrt2',
-            'password1': 'ZXCh6',
-            'password2': 'ZXCh6',
+            'password1': 'ZXCh6',  # NOSONAR
+            'password2': 'ZXCh6',  # NOSONAR
         }
 
         response = self.client.get(
