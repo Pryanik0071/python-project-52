@@ -9,7 +9,7 @@ from task_manager.mixins import CustomLoginRequiredMixin, CustomCheckUserMixin
 from task_manager.tasks.models import Task
 
 
-USERS = "/login/"
+USERS = "/users/"
 
 
 class IndexView(View):
@@ -43,7 +43,7 @@ class CreateView(View):
                                  messages.SUCCESS,
                                  _("User registered successfully"))
             form.save()
-            return redirect(USERS)
+            return redirect('/login/')
         return render(request, self.template,
                       self.get_context_data(form))
 
