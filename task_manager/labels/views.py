@@ -8,6 +8,9 @@ from task_manager.mixins import CustomLoginRequiredMixin
 from task_manager.tasks.models import Task
 
 
+LABELS = '/labels/'
+
+
 class IndexView(CustomLoginRequiredMixin):
 
     def get(self, request, *args, **kwargs):
@@ -36,7 +39,7 @@ class CreateView(CustomLoginRequiredMixin):
                                  messages.SUCCESS,
                                  _("Label created successfully"))
             form.save()
-            return redirect('/labels/')
+            return redirect(LABELS)
         return render(request, self.template, self.get_context_data(form))
 
 
@@ -70,7 +73,7 @@ class UpdateView(CustomLoginRequiredMixin):
                                  messages.SUCCESS,
                                  _("Label successfully changed"))
             form.save()
-            return redirect('/labels/')
+            return redirect(LABELS)
         return render(
             request, self.template, self.get_context_data(form, label)
         )
@@ -104,8 +107,8 @@ class DeleteView(CustomLoginRequiredMixin):
                     request,
                     _("Cannot delete label because it is in use.")
                 )
-                return redirect('/labels/')
+                return redirect(LABELS)
             else:
                 label.delete()
                 messages.success(request, _("Label successfully deleted"))
-        return redirect('/labels/')
+        return redirect(LABELS)
