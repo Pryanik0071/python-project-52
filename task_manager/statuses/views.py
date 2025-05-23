@@ -8,6 +8,9 @@ from task_manager.mixins import CustomLoginRequiredMixin
 from task_manager.tasks.models import Task
 
 
+STATUS = "/statuses/"
+
+
 class IndexView(CustomLoginRequiredMixin):
 
     def get(self, request, *args, **kwargs):
@@ -36,7 +39,7 @@ class CreateView(CustomLoginRequiredMixin):
                                  messages.SUCCESS,
                                  _("Status created successfully"))
             form.save()
-            return redirect('/statuses/')
+            return redirect(STATUS)
         return render(request, self.template, self.get_context_data(form))
 
 
@@ -69,7 +72,7 @@ class UpdateView(CustomLoginRequiredMixin):
                                  messages.SUCCESS,
                                  _("Status successfully changed"))
             form.save()
-            return redirect('/statuses/')
+            return redirect(STATUS)
         return render(request, self.template,
                       self.get_context_data(form, status))
 
@@ -100,8 +103,8 @@ class DeleteView(CustomLoginRequiredMixin):
                 messages.error(
                     request, _("Cannot delete status because it is in use.")
                 )
-                return redirect('/statuses/')
+                return redirect(STATUS)
             else:
                 status.delete()
                 messages.success(request, _("Status successfully deleted"))
-        return redirect('/statuses/')
+        return redirect(STATUS)

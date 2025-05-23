@@ -9,6 +9,9 @@ from .forms import TaskForm
 from task_manager.mixins import CustomLoginRequiredMixin
 
 
+TASKS = '/tasks/'
+
+
 class BaseTaskView(CustomLoginRequiredMixin):
     def get_task(self):
         pk = self.kwargs.get('pk')
@@ -59,7 +62,7 @@ class CreateView(CustomLoginRequiredMixin):
             messages.add_message(request,
                                  messages.SUCCESS,
                                  _("Task created successfully"))
-            return redirect('/tasks/')
+            return redirect(TASKS)
         return render(request, self.template,
                       self.get_context_data(form))
 
@@ -89,7 +92,7 @@ class UpdateView(BaseTaskView):
                                  messages.SUCCESS,
                                  _("Task successfully changed"))
             form.save()
-            return redirect('/tasks/')
+            return redirect(TASKS)
         return render(request, self.template,
                       self.get_context_data(form, task))
 
@@ -108,7 +111,7 @@ class DeleteView(BaseTaskView):
         task = self.get_task()
         if task.author != self.request.user:
             messages.error(request, _("Only the author can delete the task"))
-            return redirect('/tasks/')
+            return redirect(TASKS)
         return render(request, 'tasks/delete.html',
                       self.get_context_data(task))
 
@@ -117,4 +120,4 @@ class DeleteView(BaseTaskView):
         if task:
             task.delete()
             messages.success(request, _("Task successfully deleted"))
-        return redirect('/tasks/')
+        return redirect(TASKS)

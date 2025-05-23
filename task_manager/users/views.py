@@ -9,6 +9,9 @@ from task_manager.mixins import CustomLoginRequiredMixin, CustomCheckUserMixin
 from task_manager.tasks.models import Task
 
 
+USERS = "/login/"
+
+
 class IndexView(View):
 
     def get(self, request, *args, **kwargs):
@@ -40,7 +43,7 @@ class CreateView(View):
                                  messages.SUCCESS,
                                  _("User registered successfully"))
             form.save()
-            return redirect('/login/')
+            return redirect(USERS)
         return render(request, self.template,
                       self.get_context_data(form))
 
@@ -74,7 +77,7 @@ class UpdateView(CustomLoginRequiredMixin, CustomCheckUserMixin):
                                  messages.SUCCESS,
                                  _("User successfully changed"))
             form.save()
-            return redirect('/users/')
+            return redirect(USERS)
         return render(request, self.template,
                       self.get_context_data(form, user))
 
@@ -109,8 +112,8 @@ class DeleteView(CustomLoginRequiredMixin, CustomCheckUserMixin):
                     request,
                     _("Cannot delete user because they are assigned to tasks.")
                 )
-                return redirect('/users/')
+                return redirect(USERS)
             else:
                 user.delete()
                 messages.success(request, _("User successfully deleted"))
-        return redirect('/users/')
+        return redirect(USERS)
