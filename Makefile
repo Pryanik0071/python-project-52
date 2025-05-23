@@ -24,3 +24,6 @@ install:
 
 test:
 	PYTHONPATH=. .venv/bin/pytest
+
+run-test:
+	uv run python3 manage.py test
