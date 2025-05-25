@@ -10,6 +10,36 @@
 [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=Pryanik0071_python-project-52&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=Pryanik0071_python-project-52)
 [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=Pryanik0071_python-project-52&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=Pryanik0071_python-project-52)
 
+## ENV
+
+**Создайте файл .env в корневой папке и добавьте следующие переменные:**
+
+```dotenv
+DEBUG=True
+SECRET_KEY="some-secret-key"
+DATABASE_URL="postgres://postgres:postgres@postgres:5432/postgres"
+ENVIRONMENT="dev"
+```
+
+**См. пример в .env.examples**
+
+---
+
+## Dependencies
+
+```
+"django-bootstrap5>=24.3",
+"django-filter>=25.1",
+"django>=5.1.6",
+"python-dotenv>=1.1.0",
+"dj-database-url>=2.3.0",
+"psycopg2-binary>=2.9.10",
+"gunicorn>=23.0.0",
+"whitenoise[brotli]>=6.9.0",
+"pytest>=8.3.5",
+"pytest-django>=4.11.1",
+```
+
 ## Установка и использование UV
 
 <details>
@@ -72,65 +102,3 @@ uv run manage.py runserver  # Альтернатива python manage.py runserve
 </details>
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<details>
-<summary>.ENV</summary>
-
-**Создайте файл .env в корневой папке и добавьте следующие переменные:**
-
-```dotenv
-DEBUG=True
-SECRET_KEY="some-secret-key"
-DATABASE_URL="postgres://postgres:postgres@postgres:5432/postgres"
-ENVIRONMENT="dev"
-```
-
-**См. пример в .env.examples**
-
-</details>
-
----
-
-<details>
-<summary>Dependencies</summary>
-
-```
-"django-bootstrap5>=24.3",
-"django-filter>=25.1",
-"django>=5.1.6",
-"python-dotenv>=1.1.0",
-"dj-database-url>=2.3.0",
-"psycopg2-binary>=2.9.10",
-"gunicorn>=23.0.0",
-"whitenoise[brotli]>=6.9.0",
-"pytest>=8.3.5",
-"pytest-django>=4.11.1",
-```
-
-</details>
